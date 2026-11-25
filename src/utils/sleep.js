@@ -2,7 +2,8 @@
 export const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 export const FULL = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 export const STAGES = ['Awake', 'REM', 'Light', 'Deep']
-export const COLORS = ['#F59E0B', '#8B5CF6', '#A78BFA', '#6366F1']
+// Stage colors point at the theme variables (--stage-awake/rem/light/deep in global.css).
+export const COLORS = ['var(--stage-awake)', 'var(--stage-rem)', 'var(--stage-light)', 'var(--stage-deep)']
 
 // 7.5 -> "7h 30m"
 export const fmt = (h) => { const m = Math.round(h * 60); return `${Math.floor(m / 60)}h ${m % 60}m` }

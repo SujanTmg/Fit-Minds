@@ -10,7 +10,7 @@ import { fmtT, toMin } from '../utils/scheduler'
 // Profile: shows the demo account info already in the app. Username is the demo login ID (read-only);
 // name and email can be edited and are saved to localStorage with the rest of the app data.
 export default function Profile() {
-  const { data, update } = useApp()
+  const { data, update, theme, toggleTheme } = useApp()
   const nav = useNavigate()
   const u = data.user
   // Schedule = the availability saved by Create Routine (no separate hardcoded copy)
@@ -44,6 +44,14 @@ export default function Profile() {
         <div><b>{data.goals.length}</b><small>Goals</small></div>
         <div><b>{u.streak} days</b><small>Streak</small></div>
         <div><b>{u.level}</b><small>Level</small></div>
+      </div>
+
+      <div className="card">
+        <div className="prow">
+          <span>Theme</span>
+          <b>{theme === 'dark' ? 'Dark Mode' : 'Light Mode'}</b>
+        </div>
+        <button className="btn small" onClick={toggleTheme}>Switch to {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</button>
       </div>
 
       {edit ? (

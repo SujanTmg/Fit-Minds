@@ -3,7 +3,15 @@ import { DEMO_DATA } from '../data/demoData'
 import { latestSleep, todayIndex } from '../utils/sleep'
 
 const KEY = 'fitminds-demo'
+const THEME_KEY = 'fitminds-theme'
 const Ctx = createContext()
+
+const readTheme = () => {
+  try { const t = localStorage.getItem(THEME_KEY); return t === 'dark' || t === 'light' ? t : null }
+  catch { return null }
+}
+// Applying during first render avoids a light flash when reopening with dark saved.
+const setThemeAttr = (t) => { if (typeof document !== 'undefined') document.documentElement.setAttribute('data-theme', t) }
 
 // Holds all app data in React state and mirrors it to localStorage.
 export function AppProvider({ children }) {
@@ -13,9 +21,22 @@ export function AppProvider({ children }) {
   })
   useEffect(() => localStorage.setItem(KEY, JSON.stringify(data)), [data])
 
+  // Theme: 'light' by default, 'dark' when saved. CSS vars live in global.css (html[data-theme="dark"]).
+  const [theme, setThemeState] = useState(() => {
+    const t = readTheme() || 'light'
+    setThemeAttr(t)
+    return t
+  })
+  useEffect(() => { try { localStorage.setItem(THEME_KEY, theme) } catch {} }, [theme])
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark'
+    setThemeState(next)
+    setThemeAttr(next)
+  }
+
   const update = (patch) => setData((d) => ({ ...d, ...patch }))
   const reset = () => setData({ ...DEMO_DATA, loggedIn: true }) // stay logged in
-  return <Ctx.Provider value={{ data, update, reset }}>{children}</Ctx.Provider>
+  return <Ctx.Provider value={{ data, update, reset, theme, toggleTheme }}>{children}</Ctx.Provider>
 }
 export const useApp = () => useContext(Ctx)
 

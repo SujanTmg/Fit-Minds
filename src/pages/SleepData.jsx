@@ -49,10 +49,10 @@ export default function SleepData() {
         <div className="card">
           <h3>Sleep Cycles <span className="sim">Simulated</span></h3>
           <svg viewBox="0 0 340 140" width="100%" role="img" aria-label="Simulated sleep stages chart">
-            {STAGES.map((s, i) => <text key={s} x="0" y={i * 34 + 24} fontSize="10" fill="#6B7280">{s}</text>)}
+            {STAGES.map((s, i) => <text key={s} x="0" y={i * 34 + 24} fontSize="10" style={{ fill: 'var(--muted)' }}>{s}</text>)}
             {segs.map(([s, m], i) => {
               const w = (m / total) * 290
-              const r = <rect key={i} x={x} y={s * 34 + 8} width={Math.max(w - 1, 1)} height="22" rx="5" fill={COLORS[s]} />
+              const r = <rect key={i} x={x} y={s * 34 + 8} width={Math.max(w - 1, 1)} height="22" rx="5" style={{ fill: COLORS[s] }} />
               x += w
               return r
             })}
@@ -89,9 +89,9 @@ export default function SleepData() {
         <div className="card">
           <h3>Weekly Trend</h3>
           <svg viewBox="0 0 340 120" width="100%" role="img" aria-label="Weekly sleep trend">
-            {pts.length > 1 && <polyline points={pts.map((p) => p.join(',')).join(' ')} fill="none" stroke="#6366F1" strokeWidth="3" strokeLinejoin="round" />}
-            {pts.map(([px, py], i) => <circle key={i} cx={px} cy={py} r="5" fill="#8B5CF6" />)}
-            {DAYS.map((d, i) => <text key={d} x={20 + i * 50} y="116" fontSize="10" textAnchor="middle" fill="#6B7280">{d}</text>)}
+            {pts.length > 1 && <polyline points={pts.map((p) => p.join(',')).join(' ')} fill="none" stroke="var(--primary)" strokeWidth="3" strokeLinejoin="round" />}
+            {pts.map(([px, py], i) => <circle key={i} cx={px} cy={py} r="5" style={{ fill: 'var(--accent)' }} />)}
+            {DAYS.map((d, i) => <text key={d} x={20 + i * 50} y="116" fontSize="10" textAnchor="middle" style={{ fill: 'var(--muted)' }}>{d}</text>)}
           </svg>
           <p className="muted">{trend}</p>
         </div>
