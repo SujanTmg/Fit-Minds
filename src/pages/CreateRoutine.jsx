@@ -115,8 +115,10 @@ export default function CreateRoutine() {
         </div>
         <div className="busy-form">
           <input type="text" maxLength={40} placeholder="Description (optional), e.g. Biology Lecture" autoComplete="off" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
-          <input type="time" aria-label="Start time" value={form.start} onChange={(e) => setForm({ ...form, start: e.target.value })} />
-          <input type="time" aria-label="End time" value={form.end} onChange={(e) => setForm({ ...form, end: e.target.value })} />
+          <label className="timefield"><span>Start Time</span>
+            <input type="time" value={form.start} onChange={(e) => setForm({ ...form, start: e.target.value })} /></label>
+          <label className="timefield"><span>End Time</span>
+            <input type="time" value={form.end} onChange={(e) => setForm({ ...form, end: e.target.value })} /></label>
         </div>
         <p className="muted">Repeat on (tap to select days)</p>
         <div className="chips">

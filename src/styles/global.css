@@ -213,3 +213,6 @@ input[type=time]{min-height:44px}
 .quick{display:flex;gap:4px;margin:2px 0 6px}
 .hint{font-size:12px;margin-top:10px}
 .card .btn.small:disabled{opacity:.5;cursor:not-allowed}
+/* ---- labeled Start/End time fields (Create Routine busy-period form) ---- */
+.timefield{display:flex;flex-direction:column;gap:4px;flex:1 1 130px;font-size:13px;font-weight:500;color:#4B5563}
+.timefield input{flex:none;width:100%;min-width:0}
